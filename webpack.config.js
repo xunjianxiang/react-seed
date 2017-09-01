@@ -73,10 +73,11 @@ let WebpackConfig = {
   ],
   externals: {
     'react': 'React',
-    'react-dom': 'ReactDOM'
+    'react-dom': 'ReactDOM',
+    'react-router-dom': 'ReactRouterDOM'
   },
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.jsx', '.js']
   },
   devtool: "source-map"
 }

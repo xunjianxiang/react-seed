@@ -4,8 +4,8 @@
   "description": "A seed project for React.",
   "scripts": {
     "build": "webpack -p --progress",
-    "dev": "NODE_ENV=dev webpack-dev-server -d --hot --inline",
-    "mock": "NODE_ENV=mock webpack-dev-server -d --hot --inline"
+    "dev": "NODE_ENV=dev webpack-dev-server -d --hot --inline --history-api-fallback",
+    "mock": "NODE_ENV=mock webpack-dev-server -d --hot --inline --history-api-fallback"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-3": "^6.24.1",
+    "bundle-loader": "^0.5.5",
     "css-loader": "^0.28.4",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^0.11.2",
@@ -43,6 +44,7 @@
     "node-sass": "^4.5.3",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-router-dom": "^4.2.2",
     "sass-loader": "^6.0.6",
     "source-map-loader": "^0.2.1",
     "style-loader": "^0.18.2",

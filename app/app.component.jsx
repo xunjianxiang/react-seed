@@ -1,97 +1,54 @@
 'use strict';
 
 import React from 'react';
-import { Item } from './item.component'
+import { Route, Link } from 'react-router-dom';
+import { Bundle } from './bundle';
 
-let id = 0;
-export class AppComponent extends React.Component {
-  state = {
-    list: [],
-    name: ''
-  }
-  get title () {
-    return <h1>{ this.props.title }!</h1>;
-  }
-  get content () {
-    return (
-      <div>
-        <input type="text" placeholder="please input the name" value={ this.state.name } onChange={ this.name.bind(this) }/>
-        <button onClick={ this.add.bind(this, this.state.name) }>Add</button>
-        <br/>
-        List Length: { this.state.list.length }
-        <br/>
-        <button onClick={ this.reverse.bind(this) }>Reverse</button>
-      </div>
-    )
-  }
-  get list () {
-    if (this.state.list.length) {
-      return (
-        <ul>
-          {
-            this.state.list.map(item => <li key={ item.id }> { item.name }</li>)
-          }
-        </ul>
-      )
-    } else {
-      return <div>No Items</div>
-    }
-  }
+import { Table } from './table.component';
+import UserChunk from 'bundle-loader?lazy&name=user!./user'
 
-  name (event) {
-    this.setState({name: event.target.value})
-  }
+// const LazyLoad = (chunk, name, props) => {
+//   let keys = Object.keys(props);
+//   return () => (
+//     <Bundle load={ chunk } name={name}>
+//       {Tag => <Tag/>}
+//     </Bundle>
+//   )
+// }
 
-  add (name) {
-    this.setState(state => {
-      id ++;
-      state.list.push({
-        id,
-        name
-      });
-      return { list: state.list }
-    })
-    this.setState({ name: '' })
-  }
+// const UserLazy = () => (
+//   <Bundle load={ UserChunk } name="User">
+//     {User => <User title={this.props.title}/>}
+//   </Bundle>
+// )
+const UserLazy = () => (
+  <Bundle load={ UserChunk } name="User" dependency="https://unpkg.com/vue@2.4.2/dist/vue.min.js">
+    {User => <User/>}
+  </Bundle>
+)
 
-  remove (name) {
-    this.setState(state => {
-      let index = state.list.findIndex(item => item.name === name);
-      state.list.splice(index, 1);
-      return { list: state.list }
-    })
-  }
 
-  reverse () {
-    this.setState(state => {
-      state.list.reverse();
-      return { list: state.list }
-    })
-  }
-
-  fill () {
-    let list = [];
-    for (let i = 0; i < 999; i ++) {
-      id ++;
-      list.push({
-        id,
-        name: `name_${i}`
-      })
-    }
-    console.log(list)
-    this.setState({list})
-  }
-
-  componentDidMount () {
-    this.fill();
-  }
-
+export class App extends React.Component {
   render () {
     return (
       <div>
-        { this.title }
-        { this.content }
-        { this.list }
+        <ul>
+          <li>
+            <Link to="/user">User</Link>
+          </li>
+          <li>
+            <Link to="/table">Table</Link>
+          </li>
+        </ul>
+        <Route path='/table' component={ Table }></Route>
+        <Route path='/user' component={ UserLazy }></Route>
+        {/* {
+          routes.map((route, index) => {
+            return (
+              <Route path={ route.path } component={ route.component }></Route>
+            )
+          })
+        } */}
       </div>
     )
   }

@@ -2,9 +2,13 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { AppComponent } from './app.component';
+import { BrowserRouter as Router } from 'react-router-dom';
+
+import { App } from './app.component';
 
 ReactDOM.render(
-  <AppComponent title="Hello World One"/>,
+  <Router>
+    <App title="User Controller"/>
+  </Router>,
   document.querySelector('#root')
-);
+)
