@@ -1,6 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
+import { lazyload } from './lazyload';
 
 export class Bundle extends React.Component {
   state = {
@@ -8,13 +9,8 @@ export class Bundle extends React.Component {
   }
 
   componentWillMount () {
-    let script = document.createElement('script');
-    script.setAttribute('src', this.props.dependency);
-    document.body.append(script);
-    script.onload = () => {
-      console.log('dependency loaded');
-      this.load(this.props);
-    }
+    let dependencies = this.props.dependency ? this.props.dependency.split(',') : [];
+    lazyload(dependencies).then(result => this.load())
   }
 
   componentWillReceiveProps (nextProps) {
@@ -24,7 +20,6 @@ export class Bundle extends React.Component {
   }
 
   load () {
-    console.log('chunk load');
     this.setState({
       name: null
     })

@@ -7,22 +7,8 @@ import { Bundle } from './bundle';
 import { Table } from './table.component';
 import UserChunk from 'bundle-loader?lazy&name=user!./user'
 
-// const LazyLoad = (chunk, name, props) => {
-//   let keys = Object.keys(props);
-//   return () => (
-//     <Bundle load={ chunk } name={name}>
-//       {Tag => <Tag/>}
-//     </Bundle>
-//   )
-// }
-
-// const UserLazy = () => (
-//   <Bundle load={ UserChunk } name="User">
-//     {User => <User title={this.props.title}/>}
-//   </Bundle>
-// )
 const UserLazy = () => (
-  <Bundle load={ UserChunk } name="User" dependency="https://unpkg.com/vue@2.4.2/dist/vue.min.js">
+  <Bundle load={ UserChunk } name="User" dependency="https://unpkg.com/antd@2.13.0/dist/antd.min.js, https://unpkg.com/antd@2.13.0/dist/antd.min.css">
     {User => <User/>}
   </Bundle>
 )
@@ -42,13 +28,6 @@ export class App extends React.Component {
         </ul>
         <Route path='/table' component={ Table }></Route>
         <Route path='/user' component={ UserLazy }></Route>
-        {/* {
-          routes.map((route, index) => {
-            return (
-              <Route path={ route.path } component={ route.component }></Route>
-            )
-          })
-        } */}
       </div>
     )
   }
