@@ -54,10 +54,6 @@ let WebpackConfig = {
       {
           test: /\.scss$/,
           use: ExtractTextWebpackPlugin.extract('css-loader?sourceMap!sass-loader?sourceMap'),
-      },
-      {
-          test: /\.eot|\.svg|\.ttf|\.woff|\.woff2$/,
-          use: 'url-loader?limit=10240&name=font/[name].[ext]'
       }
     ]
   },
@@ -78,7 +74,7 @@ let WebpackConfig = {
     'react-router-dom': 'ReactRouterDOM'
   },
   resolve: {
-    extensions: ['.jsx', '.js']
+    extensions: ['.js', '.jsx']
   },
   devtool: "source-map"
 }
