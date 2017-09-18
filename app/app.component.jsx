@@ -8,7 +8,7 @@ import { Table } from './table.component';
 import UserChunk from 'bundle-loader?lazy&name=user!./user'
 
 const UserLazy = () => (
-  <Bundle load={ UserChunk } name="User" dependency="https://unpkg.com/antd@2.13.0/dist/antd.min.js, https://unpkg.com/antd@2.13.0/dist/antd.min.css">
+  <Bundle load={ UserChunk } name="User" dependency="https://unpkg.com/jquery@3.2.1/dist/jquery.min.js, https://unpkg.com/echarts@3.7.1/dist/echarts.min.js">
     {User => <User/>}
   </Bundle>
 )
